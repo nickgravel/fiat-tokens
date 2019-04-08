@@ -49,4 +49,9 @@ module.exports = {
     reporter: 'Spec',
     //reporter: './verification/verification_reporter.js',
   },
+  compilers: {
+    solc: {
+      version: '0.4.24'
+    }
+  }
 };
