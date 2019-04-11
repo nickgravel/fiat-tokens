@@ -88,7 +88,7 @@ async function run_tests(newToken, accounts) {
     assert.notEqual(newProxiedToken.address, upgradedToken.address);
 
     assert.equal(await newProxiedToken.newBool(), true);
-    assert.equal(await newProxiedToken.newAddress(), pauserAccount);
+    assert.equal((await newProxiedToken.newAddress()).toUpperCase(), pauserAccount.toUpperCase());
     assert.equal((new BigNumber(12)).isEqualTo(await newProxiedToken.newUint()), true);
 
     customVars = [
@@ -117,11 +117,11 @@ async function run_tests(newToken, accounts) {
     assert.notEqual(newProxiedToken.address, upgradedToken.address);
 
     assert.equal(await newProxiedToken.newBool(), true);
-    assert.equal(await newProxiedToken.newAddress(), pauserAccount);
+    assert.equal((await newProxiedToken.newAddress()).toUpperCase(), pauserAccount.toUpperCase());
     assert.equal((new BigNumber(12)).isEqualTo(await newProxiedToken.newUint()), true);
 
     await newProxiedToken.setNewAddress(masterMinterAccount);
-    assert.equal(await newProxiedToken.newAddress(), masterMinterAccount);
+    assert.equal((await newProxiedToken.newAddress()).toUpperCase(), masterMinterAccount.toUpperCase());
 
     customVars = [
       { 'variable': 'minterAllowance.minterAccount', 'expectedValue': new BigNumber(amount - mintAmount) },

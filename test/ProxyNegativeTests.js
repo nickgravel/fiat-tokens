@@ -44,7 +44,7 @@ async function run_tests(newToken, accounts) {
 
   it('nut002 should fail to switch adminAccount with non-adminAccount as caller', async function () {
     await expectRevert(proxy.changeAdmin(masterMinterAccount, {from: masterMinterAccount}));
-    assert.equal(await proxy.admin({from: proxyOwnerAccount}), proxyOwnerAccount);
+    assert.equal((await proxy.admin({from: proxyOwnerAccount})).toUpperCase(), proxyOwnerAccount.toUpperCase());
     customVars = [];
     await checkVariables([token], [customVars]);
   });
@@ -88,9 +88,9 @@ async function run_tests(newToken, accounts) {
 
   it('nut008 shoud fail to update proxy storage if state-changing function called directly in FiatToken', async function () {
     await rawToken.initialize(name, symbol, currency, decimals, masterMinterAccount, pauserAccount, blacklisterAccount, tokenOwnerAccount);
-    assert.equal(await rawToken.pauser(), pauserAccount);
+    assert.equal((await rawToken.pauser()).toUpperCase(), pauserAccount.toUpperCase());
     await rawToken.updatePauser(masterMinterAccount, {from: tokenOwnerAccount});
-    assert.equal(await rawToken.pauser(), masterMinterAccount);
+    assert.equal((await rawToken.pauser()).toUpperCase(), masterMinterAccount.toUpperCase());
 
     customVars = [];
     await checkVariables([token], [customVars]);

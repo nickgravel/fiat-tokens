@@ -450,7 +450,7 @@ async function run_tests(newToken, accounts) {
   it('should change the minter and mint as well as fail to mint with the old minter', async function () {
     let update = await token.removeMinter(minterAccount, { from: masterMinterAccount });
     assert.equal(update.logs[0].event, 'MinterRemoved');
-    assert.equal(update.logs[0].args.oldMinter, minterAccount);
+    assert.equal(update.logs[0].args.oldMinter.toUpperCase(), minterAccount.toUpperCase());
     update = await setMinter(token, accounts[3], 10000, { from: masterMinterAccount });
     await token.mint(accounts[1], 100, { from: accounts[3] });
 

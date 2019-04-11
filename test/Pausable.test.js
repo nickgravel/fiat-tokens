@@ -24,12 +24,12 @@ contract('PausableTests', function (accounts) {
 
     it('constructor owner', async function () {
         var actualOwner = await pause.owner.call();
-        assert.equal(deployerAccount, actualOwner, "wrong owner");
+        assert.equal(deployerAccount.toUpperCase(), actualOwner.toUpperCase(), "wrong owner");
     });
 
     it('constructor pauser', async function () {
         var actualOwner = await pause.pauser.call();
-        assert.equal(pauserAccount, actualOwner, "wrong pauser");
+        assert.equal(pauserAccount.toUpperCase(), actualOwner.toUpperCase(), "wrong pauser");
     });
 
     it('paused after pausing', async function () {
@@ -53,7 +53,7 @@ contract('PausableTests', function (accounts) {
 
         await pause.updatePauser(arbitraryAccount, {from: deployerAccount});
         var newPauser = await pause.pauser.call();
-        assert.equal(arbitraryAccount, newPauser);
+        assert.equal(arbitraryAccount.toUpperCase(), newPauser.toUpperCase());
         // double check we're still paused
         await checkPaused("should still be paused after changing pauser");
 

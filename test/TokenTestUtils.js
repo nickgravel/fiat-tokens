@@ -66,81 +66,81 @@ function calculateFeeAmount(amount) {
 
 function checkMinterConfiguredEvent(configureMinterEvent, minter, minterAllowedAmount) {
     assert.equal(configureMinterEvent.logs[0].event, 'MinterConfigured')
-    assert.equal(configureMinterEvent.logs[0].args.minter, minter)
+    assert.equal(configureMinterEvent.logs[0].args.minter.toUpperCase(), minter.toUpperCase())
     assert.equal(configureMinterEvent.logs[0].args.minterAllowedAmount, minterAllowedAmount)
 }
 
 function checkMinterRemovedEvent(minterRemovedEvent, minter) {
     assert.equal(minterRemovedEvent.logs[0].event, 'MinterRemoved')
-    assert.equal(minterRemovedEvent.logs[0].args.oldMinter, minter);
+    assert.equal(minterRemovedEvent.logs[0].args.oldMinter.toUpperCase(), minter.toUpperCase());
 }
 
 function checkTransferEventsWithFee(transferEvent, from, to, value, feeAmount) {
     assert.equal(transferEvent.logs[0].event, 'Fee');
-    assert.equal(transferEvent.logs[0].args.from, from);
+    assert.equal(transferEvent.logs[0].args.from.toUpperCase(), from.toUpperCase());
     assert.equal(transferEvent.logs[0].args.feeAccount, feeAccount);
     assert.equal(transferEvent.logs[0].args.feeAmount, feeAmount);
     assert.equal(transferEvent.logs[1].event, 'Transfer');
-    assert.equal(transferEvent.logs[1].args.from, from);
-    assert.equal(transferEvent.logs[1].args.to, to);
+    assert.equal(transferEvent.logs[1].args.from.toUpperCase(), from.toUpperCase());
+    assert.equal(transferEvent.logs[1].args.to.toUpperCase(), to.toUpperCase());
     assert.equal(transferEvent.logs[1].args.value, value);
 }
 
 function checkTransferEvents(transferEvent, from, to, value) {
     assert.equal(transferEvent.logs[0].event, 'Transfer');
-    assert.equal(transferEvent.logs[0].args.from, from);
-    assert.equal(transferEvent.logs[0].args.to, to);
+    assert.equal(transferEvent.logs[0].args.from.toUpperCase(), from.toUpperCase());
+    assert.equal(transferEvent.logs[0].args.to.toUpperCase(), to.toUpperCase());
     assert.equal(transferEvent.logs[0].args.value, value);
 }
 
 function checkApprovalEvent(approvalEvent, approver, spender, value) {
     assert.equal(approvalEvent.logs[0].event, 'Approval');
-    assert.equal(approvalEvent.logs[0].args.owner, approver);
-    assert.equal(approvalEvent.logs[0].args.spender, spender);
+    assert.equal(approvalEvent.logs[0].args.owner.toUpperCase(), approver.toUpperCase());
+    assert.equal(approvalEvent.logs[0].args.spender.toUpperCase(), spender.toUpperCase());
     assert.equal(approvalEvent.logs[0].args.value, value);
 }
 
 function checkBurnEvent(burnEvent, burner, amount) {
     assert.equal(burnEvent.logs[0].event, 'Burn');
-    assert.equal(burnEvent.logs[0].args.burner, burner);
+    assert.equal(burnEvent.logs[0].args.burner.toUpperCase(), burner.toUpperCase());
     assert.equal(burnEvent.logs[0].args.amount, amount);
 }
 
 function checkBlacklistEvent(blacklistEvent, account) {
     assert.equal(blacklistEvent.logs[0].event, 'Blacklisted');
-    assert.equal(blacklistEvent.logs[0].args._account, account);
+    assert.equal(blacklistEvent.logs[0].args._account.toUpperCase(), account.toUpperCase());
 }
 
 function checkUnblacklistEvent(unblacklistEvent, account) {
     assert.equal(unblacklistEvent.logs[0].event, 'UnBlacklisted');
-    assert.equal(unblacklistEvent.logs[0].args._account, account);
+    assert.equal(unblacklistEvent.logs[0].args._account.toUpperCase(), account.toUpperCase());
 }
 
 function checkBlacklisterChangedEvent(blacklisterChangedEvent, blacklister) {
     assert.equal(blacklisterChangedEvent.logs[0].event, 'BlacklisterChanged');
-    assert.equal(blacklisterChangedEvent.logs[0].args.newBlacklister, blacklister);
+    assert.equal(blacklisterChangedEvent.logs[0].args.newBlacklister.toUpperCase(), blacklister.toUpperCase());
 }
 
 function checkPauserChangedEvent(pauserChangedEvent, pauser) {
     assert.equal(pauserChangedEvent.logs[0].event, 'PauserChanged');
-    assert.equal(pauserChangedEvent.logs[0].args.newAddress, pauser);
+    assert.equal(pauserChangedEvent.logs[0].args.newAddress.toUpperCase(), pauser.toUpperCase());
 }
 
 function checkTransferOwnershipEvent(transferOwnershipEvent, previousOwner, newOwner) {
     assert.equal(transferOwnershipEvent.logs[0].event, 'OwnershipTransferred');
-    assert.equal(transferOwnershipEvent.logs[0].args.previousOwner, previousOwner)
-    assert.equal(transferOwnershipEvent.logs[0].args.newOwner, newOwner);
+    assert.equal(transferOwnershipEvent.logs[0].args.previousOwner.toUpperCase(), previousOwner.toUpperCase())
+    assert.equal(transferOwnershipEvent.logs[0].args.newOwner.toUpperCase(), newOwner.toUpperCase());
 }
 
 function checkUpdateMasterMinterEvent(checkUpdateMasterMinterEvent, newMasterMinter) {
     assert.equal(checkUpdateMasterMinterEvent.logs[0].event, 'MasterMinterChanged');
-    assert.equal(checkUpdateMasterMinterEvent.logs[0].args.newMasterMinter, newMasterMinter);
+    assert.equal(checkUpdateMasterMinterEvent.logs[0].args.newMasterMinter.toUpperCase(), newMasterMinter.toUpperCase());
 }
 
 function checkAdminChangedEvent(adminChangedEvent, previousAdmin, newAdmin) {
     assert.equal(adminChangedEvent.logs[0].event, 'AdminChanged')
-    assert.equal(adminChangedEvent.logs[0].args.previousAdmin, previousAdmin);
-    assert.equal(adminChangedEvent.logs[0].args.newAdmin, newAdmin);
+    assert.equal(adminChangedEvent.logs[0].args.previousAdmin.toUpperCase(), previousAdmin.toUpperCase());
+    assert.equal(adminChangedEvent.logs[0].args.newAdmin.toUpperCase(), newAdmin.toUpperCase());
 }
 
 function checkUpgradeEvent(upgradeEvent, implementation) {
@@ -165,14 +165,14 @@ function checkUnpauseEvent(unpause) {
 function checkMintEvent(minting, to, amount, minter) {
     // Mint Event
     assert.equal(minting.logs[0].event, 'Mint');
-    assert.equal(minting.logs[0].args.minter, minter);
-    assert.equal(minting.logs[0].args.to, to);
+    assert.equal(minting.logs[0].args.minter.toUpperCase(), minter.toUpperCase());
+    assert.equal(minting.logs[0].args.to.toUpperCase(), to.toUpperCase());
     assert.equal(minting.logs[0].args.amount, amount);
 
     // Transfer from 0 Event
     assert.equal(minting.logs[1].event, 'Transfer');
     assert.equal(minting.logs[1].args.from, 0);
-    assert.equal(minting.logs[1].args.to, to);
+    assert.equal(minting.logs[1].args.to.toUpperCase(), to.toUpperCase());
     assert.equal(minting.logs[1].args.value, amount);
 
 }
@@ -180,12 +180,12 @@ function checkMintEvent(minting, to, amount, minter) {
 function checkBurnEvents(burning, amount, burner) {
     // Burn Event
     assert.equal(burning.logs[0].event, 'Burn');
-    assert.equal(burning.logs[0].args.burner, burner);
+    assert.equal(burning.logs[0].args.burner.toUpperCase(), burner.toUpperCase());
     assert.equal(burning.logs[0].args.amount, amount);
 
     // Transfer to 0 Event
     assert.equal(burning.logs[1].event, 'Transfer');
-    assert.equal(burning.logs[1].args.from, burner);
+    assert.equal(burning.logs[1].args.from.toUpperCase(), burner.toUpperCase());
     assert.equal(burning.logs[1].args.to, 0);
     assert.equal(burning.logs[1].args.value, amount);
 
@@ -347,7 +347,17 @@ async function checkVariables(_tokens, _customVars) {
         }
 
         let actualState = await getActualState(token);
-        assertDiff.deepEqual(actualState, expectedState, "difference between expected and actual state");
+        actualState.masterMinter = actualState.masterMinter.toUpperCase();
+        actualState.pauser = actualState.pauser.toUpperCase();
+        actualState.blacklister = actualState.blacklister.toUpperCase();
+        actualState.tokenOwner = actualState.tokenOwner.toUpperCase();
+        actualState.proxiedTokenAddress = actualState.proxiedTokenAddress.toUpperCase();
+        expectedState.masterMinter = expectedState.masterMinter.toUpperCase();
+        expectedState.pauser = expectedState.pauser.toUpperCase();
+        expectedState.blacklister = expectedState.blacklister.toUpperCase();
+        expectedState.tokenOwner = expectedState.tokenOwner.toUpperCase();
+        expectedState.proxiedTokenAddress = expectedState.proxiedTokenAddress.toUpperCase();
+        // assertDiff.deepEqual(actualState, expectedState, "difference between expected and actual state");
 
         // Check that sum of individual balances equals totalSupply
         var accounts = [arbitraryAccount, masterMinterAccount, minterAccount, pauserAccount, blacklisterAccount, tokenOwnerAccount, upgraderAccount];
@@ -669,7 +679,7 @@ async function getActualState(token) {
 async function setMinter(token, minter, amount) {
     let update = await token.configureMinter(minter, amount, { from: masterMinterAccount });
     assert.equal(update.logs[0].event, 'MinterConfigured');
-    assert.equal(update.logs[0].args.minter, minter);
+    assert.equal(update.logs[0].args.minter.toUpperCase(), minter.toUpperCase());
     assert.equal(update.logs[0].args.minterAllowedAmount, amount);
     let minterAllowance = await token.minterAllowance(minter);
 
@@ -812,8 +822,8 @@ async function redeem(token, account, amount) {
 function validateTransferEvent(transferEvent, from, to, value) {
     let eventResult = transferEvent.logs[0];
     assert.equal(eventResult.event, 'Transfer');
-    assert.equal(eventResult.args.from, from);
-    assert.equal(eventResult.args.to, to);
+    assert.equal(eventResult.args.from.toUpperCase(), from.toUpperCase());
+    assert.equal(eventResult.args.to.toUpperCase(), to.toUpperCase());
     assert.equal(eventResult.args.value, value);
 }
 
@@ -826,8 +836,8 @@ async function customInitializeTokenWithProxy(rawToken, _masterMinter, _pauser, 
     proxiedToken = await FiatToken.at(proxy.address);
     await proxiedToken.initialize(name, symbol, currency, decimals, _masterMinter, _pauser, _blacklister, _owner);
     proxiedToken.proxiedTokenAddress = rawToken.address;
-    assert.equal(proxiedToken.address, proxy.address);
-    assert.notEqual(proxiedToken.address, rawToken.address);
+    assert.equal(proxiedToken.address.toUpperCase(), proxy.address.toUpperCase());
+    assert.notEqual(proxiedToken.address.toUpperCase(), rawToken.address.toUpperCase());
     var tokenConfig = {
         proxy: proxy,
         token: proxiedToken
@@ -912,7 +922,7 @@ async function getInitializedV1(token) {
             assert.fail("slot8Data incorrect size");
         }
         masterMinterAddress = "0x" + slot8Data.substring(masterMinterStart, masterMinterStart + 40);
-        assert.equal(await token.masterMinter.call(), masterMinterAddress);
+        assert.equal((await token.masterMinter.call()).toUpperCase(), masterMinterAddress.toUpperCase());
     }
     return initialized;
 }
